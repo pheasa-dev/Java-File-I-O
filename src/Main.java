@@ -1,7 +1,9 @@
+import jdk.jfr.DataAmount;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Data
 class Course {
     private Integer courseId;
     private String courseTitle;
@@ -9,63 +11,13 @@ class Course {
     private String courseEndedDate;
     private Boolean isAvailable;
 
-    // Constructor with no parameters
-    public Course() {}
-
-    // Constructor with parameters
-    public Course(Integer courseId, String courseTitle, String courseStartedDate, String courseEndedDate, Boolean isAvailable) {
-        this.courseId = courseId;
-        this.courseTitle = courseTitle;
-        this.courseStartedDate = courseStartedDate;
-        this.courseEndedDate = courseEndedDate;
-        this.isAvailable = isAvailable;
-    }
-
-    // Getters and Setters
-    public Integer getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
-    }
-
-    public String getCourseTitle() {
-        return courseTitle;
-    }
-
-    public void setCourseTitle(String courseTitle) {
-        this.courseTitle = courseTitle;
-    }
-
-    public String getCourseStartedDate() {
-        return courseStartedDate;
-    }
-
-    public void setCourseStartedDate(String courseStartedDate) {
-        this.courseStartedDate = courseStartedDate;
-    }
-
-    public String getCourseEndedDate() {
-        return courseEndedDate;
-    }
-
-    public void setCourseEndedDate(String courseEndedDate) {
-        this.courseEndedDate = courseEndedDate;
-    }
-
-    public Boolean getAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(Boolean available) {
-        isAvailable = available;
-    }
 }
 
 interface CourseService {
     void addNewCourse(String courseTitle);
+
     void getAllCourses();
+
     void getCourseById(int courseId);
 }
 
@@ -131,24 +83,23 @@ class View {
             int choice = Integer.parseInt(reader.readLine());
 
             switch (choice) {
-                case 1:
+                case 1 -> {
                     System.out.print("Enter course title: ");
                     String title = reader.readLine();
                     courseService.addNewCourse(title);
-                    break;
-                case 2:
-                    courseService.getAllCourses();
-                    break;
-                case 3:
+                }
+                case 2 -> courseService.getAllCourses();
+                case 3 -> {
                     System.out.print("Enter course ID: ");
                     int id = Integer.parseInt(reader.readLine());
                     courseService.getCourseById(id);
                     break;
-                case 4:
+                }
+                case 4 -> {
                     System.out.println("Exiting...");
                     return;
-                default:
-                    System.out.println("Invalid choice. Please enter a number between 1 and 4.");
+                }
+                default -> System.out.println("Invalid choice. Please enter a number between 1 and 4.");
             }
         }
     }
