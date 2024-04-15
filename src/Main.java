@@ -1,16 +1,21 @@
 import jdk.jfr.DataAmount;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 class Course {
     private Integer courseId;
     private String courseTitle;
     private String courseStartedDate;
     private String courseEndedDate;
     private Boolean isAvailable;
-
 }
 
 interface CourseService {
@@ -31,13 +36,10 @@ class CourseServiceImpl implements CourseService {
         String courseStartedDate = "Some Start Date";
         String courseEndedDate = "Some End Date";
         boolean isAvailable = true;
-
         // Create new course object
         Course newCourse = new Course(courseId, courseTitle, courseStartedDate, courseEndedDate, isAvailable);
-
         // Add to the list
         courses.add(newCourse);
-
         // Write to file
         try (PrintWriter writer = new PrintWriter(new FileWriter("course.csv", true))) {
             writer.println(courseId + "," + courseTitle + "," + courseStartedDate + "," + courseEndedDate + "," + isAvailable);
@@ -50,7 +52,7 @@ class CourseServiceImpl implements CourseService {
     public void getAllCourses() {
         System.out.println("Course ID | Course Title | Started Date | Ended Date | Available");
         for (Course course : courses) {
-            System.out.println(course.getCourseId() + " | " + course.getCourseTitle() + " | " + course.getCourseStartedDate() + " | " + course.getCourseEndedDate() + " | " + course.getAvailable());
+            System.out.println(course.getCourseId() + " | " + course.getCourseTitle() + " | " + course.getCourseStartedDate() + " | " + course.getCourseEndedDate() + " | " + course.getIsAvailable());
         }
     }
 
@@ -60,7 +62,7 @@ class CourseServiceImpl implements CourseService {
             if (course.getCourseId().equals(courseId)) {
                 System.out.println("Course found:");
                 System.out.println("Course ID | Course Title | Started Date | Ended Date | Available");
-                System.out.println(course.getCourseId() + " | " + course.getCourseTitle() + " | " + course.getCourseStartedDate() + " | " + course.getCourseEndedDate() + " | " + course.getAvailable());
+                System.out.println(course.getCourseId() + " | " + course.getCourseTitle() + " | " + course.getCourseStartedDate() + " | " + course.getCourseEndedDate() + " | " + course.getIsAvailable());
                 return;
             }
         }
