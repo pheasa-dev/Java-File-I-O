@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * YET PHEASA
@@ -117,7 +118,7 @@ class CourseServiceImpl implements CourseService {
     @Override
     public void getCourseById(int courseId) {
         for (Course course : courses) {
-            if (course.getCourseId().equals(courseId)) {
+            if (course.getCourseId().equals(Optional.of(courseId))) {
                 System.out.println("Course found:");
                 System.out.println("Course ID | Course Title | Started Date | Ended Date | Available");
                 System.out.println(course.getCourseId() + " | " + course.getCourseTitle() + " | " + course.getCourseStartedDate() + " | " + course.getCourseEndedDate() + " | " + course.getAvailable());
